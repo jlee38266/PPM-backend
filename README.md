@@ -145,10 +145,135 @@
 ![통합](https://github.com/OmokNoonE/PPM-backend/assets/80697609/5b887978-a506-470c-947f-685ee87ef1d5)
 </details>
 
+## ProjectMember Logic Flow Diagram
+```mermaid
+---
+config:
+  theme: mc
+  themeVariables:
+    fontSize: 20px
+    fontFamily: Arial
+---
+flowchart LR
+    A("fa:fa-play 시작")
+    B("fa:fa-users 구성원<br>관리 요청")
+    C{"<br>작업 유형?"}
+    D["fa:fa-search 조회"]
+    E["fa:fa-plus-square 생성"]
+    F["fa:fa-edit 수정"]
+    G["fa:fa-trash-alt 제거"]
+    H("fa:fa-database<br>ProjectMember<br>Entity")
+    I("fa:fa-history<br>ProjectMember<br>History")
+    J("fa:fa-flag-checkered 완료")
+    A --> B
+    B --> C
+    C -->|조회| D
+    C -->|생성| E
+    C -->|수정| F
+    C -->|제거| G
+    D --> H
+    E & F & G --> H
+    H --> I
+    D --> J
+    I --> J
+    subgraph 데이터처리 [" "]
+    H
+    I
+    end
+    %% 노드 스타일링
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef highlight fill:#e1f5fe,stroke:#0288d1,stroke-width:3px
+    classDef process fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    class A,J highlight
+    class B,H,I process
+    class C decision
+    class D,E,F,G process
+    %% 노드별 스타일
+    style A font-weight:bold
+    style B font-weight:bold,fill:#dce9f1
+    style C font-weight:bold
+    style D fill:#e6fffa
+    style E fill:#e6f3ff
+    style F fill:#fff5e6
+    style G fill:#f5e6ff
+    style H font-weight:bold,fill:#fff0f5
+    style I font-weight:bold,fill:#f0f8ff
+    style J font-weight:bold
+    style 데이터처리 fill:none,stroke:none
+    %% 링크 스타일
+    linkStyle default stroke:#666,stroke-width:2px,fill:none
+```
 
+## Notification Logic Flow Diagram
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '20px', 'fontFamily': 'Arial' }}}%%
+flowchart LR
+    A("fa:fa-play 시작")
+    B("fa:fa-clock 알림<br>요청")
+    C["fa:fa-envelope 알림<br>생성"]
+    D{"fa:fa-cogs<br>알림 설정<br>확인"}
+    E["fa:fa-envelope 이메일"]
+    F["fab:fa-slack Slack"]
+    G("fa:fa-paper-plane<br>알림 전송")
+    H{"fa:fa-question<br>전송 성공?"}
+    I["fa:fa-check 성공 상태"]
+    J["fa:fa-exclamation 실패 상태"]
+    K("fa:fa-database<br>Sent Entity<br>생성")
+    L("fa:fa-flag-checkered 완료")
 
+    A --> B
+    B --> C
+    C --> D
+    D -->|이메일 활성화| E
+    D -->|Slack 활성화| F
+    E & F --> G
+    G --> H
+    H -->|Yes| I
+    H -->|No| J
+    I & J --> K
+    K --> L
 
+    subgraph 알림처리 [" "]
+    C
+    D
+    E
+    F
+    G
+    H
+    I
+    J
+    end
 
+    %% 노드 스타일링
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef highlight fill:#e1f5fe,stroke:#0288d1,stroke-width:3px
+    classDef process fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+
+    class A,L highlight
+    class B,C,G,K process
+    class D,H decision
+    class E,F,I,J process
+
+    %% 노드별 스타일
+    style A font-weight:bold
+    style B font-weight:bold,fill:#dce9f1
+    style C font-weight:bold,fill:#e6f3ff
+    style D font-weight:bold
+    style E fill:#e6fffa
+    style F fill:#e6f3ff
+    style G font-weight:bold,fill:#f0f8ff
+    style H font-weight:bold
+    style I fill:#e6fffa
+    style J fill:#ffe6e6
+    style K font-weight:bold,fill:#fff0f5
+    style L font-weight:bold
+    style 알림처리 fill:none,stroke:none
+
+    %% 링크 스타일
+    linkStyle default stroke:#666,stroke-width:2px,fill:none
+```
 
 <br>
 
